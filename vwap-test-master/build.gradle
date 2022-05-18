@@ -1,0 +1,51 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+
+version = '0.2'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+application {
+    mainClass = 'hsoft.VwapTrigger'
+}
+
+dependencies {
+    implementation group: 'log4j', name: 'log4j', version: '1.2.17'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+
+    implementation fileTree('lib')
+}
+
+// as txt to be able to send this by email
+// to be removed if we can host this project outside Horizon
+task install (type: Copy) {
+    println "Renaming txt libraries as jar"
+    from "lib-as-txt"
+    into "lib"
+    rename '(.+).txt', '$1.jar'
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
